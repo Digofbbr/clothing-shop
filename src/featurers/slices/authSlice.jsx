@@ -15,11 +15,9 @@ export const authSlice = createSlice({
     login(state, action){
       const userId = action.payload;
       const userValidation = /^[A-Za-z]{4,10}$/i.test(userId.name);
-      const passwordValidation =
-        /^\d{5,}$/.test(
-          userId.password
-        );
+      const passwordValidation = userId.password.trim().length >= 5;
       state.user = userId;
+
       if (!userValidation || !passwordValidation) {
         state.user.authUser = false;
       } else {
