@@ -7,3 +7,27 @@
 body {
   @apply font-sans;
 }
+
+/* Personalizando a cor dos bullets */
+.swiper-pagination-bullet {
+  background-color: beige;
+  width: 12px; /* Largura dos bullets */
+  height: 12px; /* Altura dos bullets */
+  opacity: 1; /* Visibilidade total dos bullets */
+}
+
+/* Cor e tamanho dos bullets ativos */
+.swiper-pagination-bullet-active {
+  background-color: #008080; /* Cor do bullet ativo */
+  width: 16px; /* Largura do bullet ativo */
+  height: 16px; /* Altura do bullet ativo */
+}
+
+.swiper-button-next , .swiper-button-prev{
+  color: #008080;
+  /* background-color: white; */
+}
+
+.swiper-button-next::after , .swiper-button-prev::after{
+  font-size: 30px;
+}
