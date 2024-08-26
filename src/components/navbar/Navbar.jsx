@@ -24,7 +24,9 @@ function Navbar() {
       <div className="w-full bg-black text-white text-2xl py-3 leading-none text-center font-bold">Clothing Shop</div>
       <div className="w-full max-w-[1200px] flex justify-between m-auto w-80% py-1">
         <div>
-          <img src={logo} alt="logo" className="max-w-[90px]"/>
+          <Link to="/">
+            <img src={logo} alt="logo" className="max-w-[90px]"/>
+          </Link>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex gap-1 items-center text-md">

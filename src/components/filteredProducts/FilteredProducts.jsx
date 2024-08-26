@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from '../navbar/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { ProductCard } from './ProductCard'
@@ -11,6 +12,7 @@ import {
 } from "@material-tailwind/react";
 import {filterProducts, filterGender, sortByHighPrice, filterByColor, filterBySize } from '../../featurers/slices/productsSlice'
 import Error from '../error/Error'
+import NavigateButtonsAlt from '../navigatebuttons/navigateButtonsAlt'
 
 function FilteredProducts() {
 
@@ -34,9 +36,13 @@ function FilteredProducts() {
 
   return (
     <div>
+      <Navbar />
       <div className="pt-16">
         <div className="pl-14">
-          <h1 className="text-4xl font-bold text-gray-600 tracking-normal leading-none">{type}</h1>
+          <div className='flex gap-8 items-center'>
+            <h1 className="text-4xl font-bold text-gray-600 tracking-normal leading-none">{type}</h1>
+            <NavigateButtonsAlt currentType={type}/>
+          </div>
           <div className="flex items-center justify-between py-8">
             <div className="flex items-center">
               {genderButtons.map((gender, index) => {

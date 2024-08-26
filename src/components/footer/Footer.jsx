@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -10,7 +11,9 @@ const Footer = () => {
       </div>
       <div className="flex items-center justify-around pt-4">
         <div>
-          <img className="h-20" src={logo} alt="logo"></img>
+          <Link to="/">
+            <img className="h-20" src={logo} alt="logo"></img>
+          </Link>
         </div>
         <div>
           <p className="text-black text-sm font-inter no-underline normal-case">
