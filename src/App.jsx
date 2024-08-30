@@ -11,6 +11,7 @@ function App() {
 
   const user = useSelector((state) => state.user.user)
   const {authUser} = user
+  
   return (
     <>
       <BrowserRouter >

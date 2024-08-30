@@ -19,7 +19,7 @@ const Cart = ({openModal, setOpen}) => {
     <div className="">
       {cart.length > 0 ? 
           
-          <div className="overflow-auto">
+          <div className="">
             <Dialog
               className="border-0 outline-0"
               open={openModal}
@@ -33,13 +33,14 @@ const Cart = ({openModal, setOpen}) => {
               <DialogBody className="flex flex-col justify-center items-start">
                 {cart.map((item, index) => {
                   return(
-                    <div key={index}>
-                      <div className="grid grid-cols-2 py-4">
-                        <div>
+                    <div className='w-full border-b-2' key={index}>
+                      <div className="flex gap-10 items-center justify-between py-4">
+                        <div className='min-w-[100px]'>
                           <img className="h-[125px] rounded-md" src={item.img} alt={item.name}/>
+                        </div>
+                        <div className=''>
                           <div className="flex flex-col items-start">
                             <h4 className="text-black text-base font-bold tracking-normal leading-none pt-2">{item.name}</h4>
-                            <p>{item.amount}</p>
                           </div>
                           <div className="max-w-sm">
                             <p className="text-black text-xs tracking-normal leading-none pt-2">{item.text}</p>

@@ -3,27 +3,32 @@ import { useParams } from "react-router-dom"
 import { Tooltip, Button } from "@material-tailwind/react"
 import { useState } from "react"
 import { addToCart } from "../../featurers/slices/cartSlice"
+import { addToWishList, removeFromWishList } from "../../featurers/slices/wishListSlice"
 import Navbar from "../navbar/Navbar"
+import { FaHeart } from "react-icons/fa";
 
 const SingleProduct = () => {
 
   const dispatch = useDispatch()
 
   const product = useSelector((state) => state.products.singleProduct)
-  const {id} = useParams()
+  const {id, type} = useParams()
+  const wishes = useSelector((state) => state.wish.wish)
+  
+  const foundWish = wishes.some((wish) => wish.id === id)
   
   const productSize = product[0].size ? product[0].size[0] : ""
   const productColor = product[0].color ? product[0].color[0] : ""
 
   const [size, setSize] = useState(productSize)
   const [color, setColor] = useState(productColor)
-
   return (
+      
     <div>
       {product.filter((product) => product.id === id).map((item, index) => {
+        
         return(
           <>
-          
             <Navbar />
             <div key={index} className="flex justify-center items-center py-10 gap-[80px]">
               <div className="">
@@ -57,9 +62,18 @@ const SingleProduct = () => {
                       {item.color.map((color, index) => <option value={color} key={index}>{color}</option>)}
                     </select>
                   </div>
-                  <Tooltip content="Add to cart" placement="bottom">
-                    <Button onClick={() => dispatch(addToCart({id: item.id, price: item.price, amount: 1, totalPrice: item.price, name: item.name, size: size, color: color, img: item.img, text: item.text}))} color="gray" size="lg" variant="outlined" ripple={true}>Add to cart</Button>
-                  </Tooltip>
+                  <div className="flex items-center gap-10">
+                    <Tooltip content="Add to cart" placement="bottom">
+                      <Button onClick={() => dispatch(addToCart({id: item.id, price: item.price, amount: 1, totalPrice: item.price, name: item.name, size: size, color: color, img: item.img, text: item.text}))} color="gray" size="lg" variant="outlined" ripple={true}>Add to cart</Button>
+                    </Tooltip>
+                    
+                    <Tooltip content={`${foundWish ? "Remove from wish list" : "Add to wish list"}`} placement="bottom">
+                      <div>
+                        <FaHeart className={`cursor-pointer text-xl ${foundWish ? "text-red-500" : ""}`} onClick={() => foundWish ? dispatch(removeFromWishList({id: item.id})) : dispatch(addToWishList({id: item.id, name: item.name, img: item.img, text: item.text, category: type}))} />
+                      </div>
+                    </Tooltip>
+                  </div>
+                  
                 </div>
               </div>
             </div>

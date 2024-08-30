@@ -4,9 +4,11 @@ import { CiHeart } from "react-icons/ci";
 import { RiShoppingBag4Line } from "react-icons/ri";
 import { useState } from 'react';
 import Cart from '../cart/Cart'
+import WishList from '../wishList/WishList';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../featurers/slices/authSlice';
 import {Avatar} from '@material-tailwind/react'
+
 
 function Navbar() {
 
@@ -16,8 +18,11 @@ function Navbar() {
   const {name, image} = user
 
   const [open, setOpen] = useState(false);
+  const [openWishList, setOpenWishList] = useState(false);
  
   const handleOpen = () => setOpen(true);
+  const handleOpenWishList = () => setOpenWishList(true)
+  const handleCloseWishList = () => setOpenWishList(false)
 
   return (
     <div>
@@ -29,9 +34,12 @@ function Navbar() {
           </Link>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex gap-1 items-center text-md">
+          <div className="flex gap-1 items-center text-md cursor-pointer" onClick={handleOpenWishList}>
             <CiHeart />
             <p>Wish List</p>
+          </div>
+          <div>
+            {<WishList handleCloseWishList={handleCloseWishList} isVisible={openWishList}/>}
           </div>
           <div className="flex gap-1 items-center text-md cursor-pointer" onClick={handleOpen}>
             {totalAmount > 0 ? <span className="rounded-full bg-gray-300 px-2 text-sm mr-1">{totalAmount}</span> : 
