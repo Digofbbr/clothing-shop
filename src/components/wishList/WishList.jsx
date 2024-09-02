@@ -25,6 +25,7 @@ const WishList = ({handleCloseWishList, isVisible}) => {
         <div className='flex flex-col gap-3 pt-3'>
           {list.map(item => {
             return(
+              
               <div key={item.id}>
                 <Link to={`/filteredProducts/${item.category}/${item.id}`}>
                 
