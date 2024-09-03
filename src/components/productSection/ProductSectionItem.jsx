@@ -8,14 +8,18 @@ import {
   Tooltip,
   Button
 } from "@material-tailwind/react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {addToCart} from '../../featurers/slices/cartSlice'
+import { FaHeart } from "react-icons/fa";
+import { removeFromWishList, addToWishList } from '../../featurers/slices/wishListSlice';
 
-const ProductSectionItem = ({id, img, name, text, size, price, color, totalPrice}) => {
+const ProductSectionItem = ({id, img, name, text, size, price, color, totalPrice, type}) => {
 
   const dispatch = useDispatch()
   const defaultSize = size[0]
   const defaultColor = color[0]
+  const wishes = useSelector((state) => state.wish.wish)
+  const foundWish = wishes.some((wish) => wish.id === id)
 
   return (
     <div>
@@ -42,11 +46,14 @@ const ProductSectionItem = ({id, img, name, text, size, price, color, totalPrice
             </Typography>
           </div>
         </CardBody>
-        <CardFooter className="flex justify-center gap-7 pt-2">
-          <Tooltip content="Add to cart">
-            <Button onClick={() => dispatch(addToCart({
-              id: id, img: img, name: name, text: text, size: defaultSize, price: price, color: defaultColor, totalPrice: totalPrice
-            }))} size="lg" color="gray" variant="outlined" ripple={true}>Add to cart</Button>
+        <CardFooter className="flex justify-center gap-7 pt-2 items-center">
+          <Button onClick={() => dispatch(addToCart({
+            id: id, img: img, name: name, text: text, size: defaultSize, price: price, color: defaultColor, totalPrice: totalPrice
+          }))} size="lg" color="gray" variant="outlined" ripple={true}>Add to cart</Button>
+          <Tooltip content={`${foundWish ? "Remove from wish list" : "Add to wish list"}`} placement="bottom">
+            <div>
+              <FaHeart className={`cursor-pointer text-xl ${foundWish ? "text-red-500" : ""}`} onClick={() => foundWish ? dispatch(removeFromWishList({id: id})) : dispatch(addToWishList({id: id, name: name, img: img, text: text, category: type}))} />
+            </div>
           </Tooltip>
         </CardFooter>
       </Card>

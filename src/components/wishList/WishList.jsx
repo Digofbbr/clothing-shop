@@ -17,7 +17,7 @@ const WishList = ({handleCloseWishList, isVisible}) => {
   }
 
   return (
-    <div className={`fixed right-0 h-screen bg-white z-10 top-0 p-4 min-w-[250px] border overflow-y-auto border-gray-700 rounded-tl-[10px] rounded-bl-[10px] transform transition-transform duration-300 ${isVisible ? 'translate-x' : 'translate-x-full'}`}>
+    <div className={`fixed right-0 h-screen bg-white z-10 top-0 p-4 min-w-[250px] border overflow-y-auto border-gray-700 rounded-tl-[10px] rounded-bl-[10px] transform transition-transform duration-300 z-20 ${isVisible ? 'translate-x' : 'translate-x-full'}`}>
       <button className='absolute top-4 right-4' onClick={handleCloseWishList}>X</button>
       <h3>Wish List</h3>
 

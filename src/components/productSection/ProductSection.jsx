@@ -11,7 +11,7 @@ const ProductSection = () => {
       <div className="grid grid-cols-3 gap-2 justify-items-center py-8 mx-auto max-w-7xl">
         {storeData.slice(0,6).map((item, index) => {
           return(
-            <ProductSectionItem key={index} id={item.id} img={item.img} name={item.name} text={item.text} size={item.size} price={item.price} color={item.color} totalPrice={item.totalPrice} />
+            <ProductSectionItem key={index} id={item.id} img={item.img} name={item.name} text={item.text} size={item.size} price={item.price} color={item.color} totalPrice={item.totalPrice} type={item.type} />
           )
         })}
       </div>
