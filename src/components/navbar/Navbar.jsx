@@ -19,7 +19,8 @@ function Navbar() {
 
   const [open, setOpen] = useState(false);
   const [openWishList, setOpenWishList] = useState(false);
- 
+  const [showMenu, setShowMenu] = useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleOpenWishList = () => setOpenWishList(true)
   const handleCloseWishList = () => setOpenWishList(false)
@@ -54,14 +55,18 @@ function Navbar() {
               </Cart>
             }
           </div>
-          <div className="flex flex-row items-center cursor-pointer pl-4">
+          <div onMouseEnter={() => setShowMenu(true)} onMouseLeave={() => setShowMenu(false)} className="flex relative flex-row items-center cursor-pointer pl-4 h-full">
             {image && <Avatar src={image} alt="avatar" size="sm" className="mr-2"></Avatar>}
-            <div onClick={() => dispatch(logout())}>
-              <p className="text-sm font-medium tracking-normal leading-none">
-                Hi {name.charAt('0').toUpperCase() + name.slice(1)}
-                
-              </p>
-            </div>
+            <p className="text-sm font-medium tracking-normal leading-none">
+              Hi {name.charAt('0').toUpperCase() + name.slice(1)}
+            </p>
+            {showMenu && (
+              <div className="absolute top-[55px] bg-white shadow-md rounded-md border border-gray-500 overflow-hidden">
+                <ul>
+                  <li onClick={() => dispatch(logout())} className="py-2 px-4 hover:bg-gray-100">Logout</li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       
