@@ -8,20 +8,26 @@ export const authSlice = createSlice({
       name: '',
       password: '',
       image: '',
-      authUser: false
+      authUser: false,
+      errorMessage: ""
     }
   },
   reducers: {
     login(state, action){
       const userId = action.payload;
-      const userValidation = /^[A-Za-z]{4,10}$/i.test(userId.name);
+      const userValidation = /^[A-Za-z]+$/i.test(userId.name);
       const passwordValidation = userId.password.trim().length >= 5;
       state.user = userId;
 
-      if (!userValidation || !passwordValidation) {
+      if (!userValidation) {
         state.user.authUser = false;
-      } else {
+        state.user.errorMessage = "Only letter acceptable"
+      }else if(!passwordValidation){
+        state.user.authUser = false
+        state.user.errorMessage = "Password length minimun: 5"
+      }else {
         state.user.authUser = true;
+        state.user.errorMessage = ""
         const saveState = JSON.stringify(userId);
         sessionStorage.setItem("authUser", saveState);
       }
@@ -31,7 +37,8 @@ export const authSlice = createSlice({
         name: '',
         password: '',
         image: '',
-        authUser: false
+        authUser: false,
+        errorMessage: ""
       }
       sessionStorage.clear()
     }

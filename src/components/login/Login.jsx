@@ -10,7 +10,7 @@ import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
 import { login } from "../../featurers/slices/authSlice";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const intitalState = {
@@ -19,11 +19,13 @@ const Login = () => {
     image: "",
   };
   const [values, setValues] = useState(intitalState);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
+  const errorMessage = useSelector((state) => state.user.user.errorMessage)
   const dispatch = useDispatch();
 
   return (
@@ -63,7 +65,9 @@ const Login = () => {
             value={values.image}
             onChange={onChange}
           />
-          <div className="-ml-2.5"></div>
+          <div className="">
+            {errorMessage && <p className="text-sm text-red-400">{errorMessage}</p>}
+          </div>
         </CardBody>
         <CardFooter className="pt-0">
           <Button

@@ -55,7 +55,7 @@ function Navbar() {
               </Cart>
             }
           </div>
-          <div onMouseEnter={() => setShowMenu(true)} onMouseLeave={() => setShowMenu(false)} className="flex relative flex-row items-center cursor-pointer pl-4 h-full">
+          <div onMouseEnter={() => setShowMenu(true)} onMouseLeave={() => setShowMenu(false)} className="flex relative flex-row items-center cursor-pointer h-full min-w-20">
             {image && <Avatar src={image} alt="avatar" size="sm" className="mr-2"></Avatar>}
             <p className="text-sm font-medium tracking-normal leading-none">
               Hi {name.charAt('0').toUpperCase() + name.slice(1)}
